@@ -16,11 +16,15 @@ char	*ft_ret_line(char *ret)
 		free(ret);
 		return (NULL);
 	}
-	ft_strlcpy(rret, ret, i);
-	if (ret[i] == '\n')
+	i = 0;
+	while (ret[i] && ret[i] != '\n')
 	{
 		rret[i] = ret[i];
 		i++;
+	}
+	if (ret[i] == '\n')
+	{
+		rret[i] = ret[i];
 	}
 	rret[i] = '\0';
 	return (rret);
@@ -57,8 +61,6 @@ char	*ft_get_line(int fd, char *ret)
 	int		reads;
 	char	*buffer;
 
-	if (!ret)
-		ret = calloc(1, 1);
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
@@ -66,9 +68,15 @@ char	*ft_get_line(int fd, char *ret)
 	while (!ft_strchr(ret, '\n') && reads != 0)
 	{
 		reads = read(fd, buffer, BUFFER_SIZE);
+		if(reads == -1)
+		{
+			free(buffer);
+			return NULL;
+		}
 		buffer[reads] = '\0';
 		ret = ft_strjoin(ret, buffer);
 	}
+	free(buffer);
 	return (ret);
 }
 
@@ -80,6 +88,8 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	ret = ft_get_line(fd, ret);
+	if (!ret)
+		return NULL;
 	line = ft_ret_line(ret);
 	ret = ft_ret(ret);
 	return (line);

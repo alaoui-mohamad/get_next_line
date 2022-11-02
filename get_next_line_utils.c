@@ -32,26 +32,6 @@ char	*ft_strchr(const char *s, int c)
 	return (0);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
-{
-	unsigned int	len_src;
-	unsigned int	i;
-
-	len_src = 0;
-	while ((char)src[len_src])
-		len_src++;
-	if (dstsize == 0)
-		return (len_src);
-	i = 0;
-	while (src[i] && --dstsize)
-	{
-		dst[i] = (char)src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (len_src);
-}
-
 char	*ft_strcat(char *dest, const char *src)
 {
 	int	i;
