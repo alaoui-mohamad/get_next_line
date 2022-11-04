@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: m-alaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/04 15:51:20 by m-alaoui          #+#    #+#             */
-/*   Updated: 2022/11/04 16:32:32 by m-alaoui         ###   ########.fr       */
+/*   Created: 2022/11/04 15:53:25 by m-alaoui          #+#    #+#             */
+/*   Updated: 2022/11/04 15:54:00 by m-alaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -71,8 +69,6 @@ char	*ft_strjoin(char  *s1, char  *s2)
 	if (!s1)
 	{
 		s1 = (char *)malloc(1 * sizeof(char));
-		if (!s1)
-			return (NULL);
 		s1[0] = '\0';
 	}
 	if (!s2)

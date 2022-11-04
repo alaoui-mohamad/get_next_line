@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: m-alaoui <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/04 15:51:15 by m-alaoui          #+#    #+#             */
-/*   Updated: 2022/11/04 16:44:29 by m-alaoui         ###   ########.fr       */
+/*   Created: 2022/11/04 15:53:31 by m-alaoui          #+#    #+#             */
+/*   Updated: 2022/11/04 16:45:28 by m-alaoui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_check_next(char *ret)
 {
@@ -41,7 +41,6 @@ char	*ft_check_next(char *ret)
 	free(ret);
 	return (save);
 }
-
 char	*ft_ret_line(char *ret)
 {
 	int		i;
@@ -49,12 +48,15 @@ char	*ft_ret_line(char *ret)
 
 	i = 0;
 	if(!ret[0])
-		return (NULL);
+		return NULL;
 	while (ret[i] && ret[i] != '\n')
 		i++;
 	rret = (char *)malloc(((i + 2) * sizeof(char)));
 	if (!rret)
-		return (free(ret), NULL);
+	{
+		free(ret);
+		return (NULL);
+	}
 	i = 0;
 	while (ret[i] && ret[i] != '\n')
 	{
@@ -68,9 +70,10 @@ char	*ft_ret_line(char *ret)
 	}
 	rret[i] = '\0';
 	return (rret);
+	
 }
 
-char	*ft_get_line(int fd, char *ret)
+char *ft_get_line (int fd,char *ret)
 {
 	int		reads;
 	char	*buffer;
@@ -96,18 +99,17 @@ char	*ft_get_line(int fd, char *ret)
 	free(buffer);
 	return (ret);
 }
-
-char	*get_next_line(int fd)
+char *get_next_line (int fd)
 {
-	static char	*ret;
+  	static char	*ret[OPEN_MAX];
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	ret = ft_get_line(fd, ret);
-	if (!ret)
+	ret[fd] = ft_get_line(fd, ret[fd]);
+	if (!ret[fd])
 		return NULL;
-	line = ft_ret_line(ret);
-	ret = ft_check_next(ret);
+	line = ft_ret_line(ret[fd]);
+	ret[fd] = ft_check_next(ret[fd]);
 	return (line);
 }
