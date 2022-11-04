@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m-alaoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hello <hello@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:53:25 by m-alaoui          #+#    #+#             */
-/*   Updated: 2022/11/04 15:54:00 by m-alaoui         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:05:29 by hello            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@ char	*ft_strchr(const char *s, int c)
 {
 	char	*str;
 
-    if(!s){
-        return NULL;
+	if (!s)
+	{
+		return (NULL);
 	}
 	str = (char *)s;
 	while (*str)
@@ -36,7 +37,7 @@ char	*ft_strchr(const char *s, int c)
 			return (str);
 		str++;
 	}
-	if ((char) !c)
+	if ((char)!c)
 		return (str);
 	return (0);
 }
@@ -59,12 +60,12 @@ char	*ft_strcat(char *dest, const char *src)
 	return (dest);
 }
 
-char	*ft_strjoin(char  *s1, char  *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int		i;
-	int		len_s1;
-	int		len_s2;
-	char	*new_str;
+	int i;
+	int len_s1;
+	int len_s2;
+	char *new_str;
 
 	if (!s1)
 	{

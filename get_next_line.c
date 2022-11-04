@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m-alaoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hello <hello@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:51:15 by m-alaoui          #+#    #+#             */
-/*   Updated: 2022/11/04 16:44:29 by m-alaoui         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:05:37 by hello            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "get_next_line.h"
 
@@ -48,7 +47,7 @@ char	*ft_ret_line(char *ret)
 	char	*rret;
 
 	i = 0;
-	if(!ret[0])
+	if (!ret[0])
 		return (NULL);
 	while (ret[i] && ret[i] != '\n')
 		i++;
@@ -82,13 +81,12 @@ char	*ft_get_line(int fd, char *ret)
 	while (!ft_strchr(ret, '\n') && reads != 0)
 	{
 		reads = read(fd, buffer, BUFFER_SIZE);
-	
-		if(reads == -1)
+		if (reads == -1)
 		{
-			if(ret != NULL)
+			if (ret != NULL)
 				free(ret);
 			free(buffer);
-			return NULL;
+			return (NULL);
 		}
 		buffer[reads] = '\0';
 		ret = ft_strjoin(ret, buffer);
@@ -106,7 +104,7 @@ char	*get_next_line(int fd)
 		return (0);
 	ret = ft_get_line(fd, ret);
 	if (!ret)
-		return NULL;
+		return (NULL);
 	line = ft_ret_line(ret);
 	ret = ft_check_next(ret);
 	return (line);

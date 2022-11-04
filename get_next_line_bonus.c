@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m-alaoui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: hello <hello@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 15:53:31 by m-alaoui          #+#    #+#             */
-/*   Updated: 2022/11/04 16:45:28 by m-alaoui         ###   ########.fr       */
+/*   Updated: 2022/11/04 17:05:21 by hello            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "get_next_line_bonus.h"
 
@@ -47,8 +46,8 @@ char	*ft_ret_line(char *ret)
 	char	*rret;
 
 	i = 0;
-	if(!ret[0])
-		return NULL;
+	if (!ret[0])
+		return (NULL);
 	while (ret[i] && ret[i] != '\n')
 		i++;
 	rret = (char *)malloc(((i + 2) * sizeof(char)));
@@ -70,10 +69,9 @@ char	*ft_ret_line(char *ret)
 	}
 	rret[i] = '\0';
 	return (rret);
-	
 }
 
-char *ft_get_line (int fd,char *ret)
+char	*ft_get_line(int fd, char *ret)
 {
 	int		reads;
 	char	*buffer;
@@ -85,13 +83,12 @@ char *ft_get_line (int fd,char *ret)
 	while (!ft_strchr(ret, '\n') && reads != 0)
 	{
 		reads = read(fd, buffer, BUFFER_SIZE);
-	
-		if(reads == -1)
+		if (reads == -1)
 		{
-			if(ret != NULL)
+			if (ret != NULL)
 				free(ret);
 			free(buffer);
-			return NULL;
+			return (NULL);
 		}
 		buffer[reads] = '\0';
 		ret = ft_strjoin(ret, buffer);
@@ -99,16 +96,16 @@ char *ft_get_line (int fd,char *ret)
 	free(buffer);
 	return (ret);
 }
-char *get_next_line (int fd)
+char	*get_next_line(int fd)
 {
-  	static char	*ret[OPEN_MAX];
-	char		*line;
+	static char *ret[OPEN_MAX];
+	char *line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	ret[fd] = ft_get_line(fd, ret[fd]);
 	if (!ret[fd])
-		return NULL;
+		return (NULL);
 	line = ft_ret_line(ret[fd]);
 	ret[fd] = ft_check_next(ret[fd]);
 	return (line);
